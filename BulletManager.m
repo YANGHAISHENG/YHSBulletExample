@@ -57,10 +57,19 @@
     }
     
     _bulletAnimationIsStop = YES;
-    for (BulletView *view in self.bulletViews) {
-        [view stopAnimation];
+    
+    // 方式一：屏幕上已有弹幕显示完后，不再产生新的弹幕
+    [self.bulletStrings removeAllObjects];
+    
+    // 方式二：删除屏幕上所有弹幕
+    /*
+    {
+        for (BulletView *view in self.bulletViews) {
+            [view stopAnimation];
+        }
+        [self.bulletViews removeAllObjects];
     }
-    [self.bulletViews removeAllObjects];
+    */
 }
 
 
@@ -130,6 +139,7 @@
                     [weakSelf createBulletView:nextBulletStr withTrajectory:trajectory];
                 } else {
                     // 说明到了评论的结尾，已经没有内容了
+                    
                 }
                 break;
             }
