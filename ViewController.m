@@ -22,6 +22,9 @@
 {
     [super viewDidLoad];
 
+    // 屏幕宽度
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    
     
     // 弹幕管理器
     __weak __typeof(&*self)weakSelf = self;
@@ -32,13 +35,13 @@
 
     
     // 开始按钮
-    UIButton *startButton = [[self class] createQQUIButtonWithFrame:CGRectMake(60, 60, 100, 40) title:@"开始弹幕"];
+    UIButton *startButton = [[self class] createQQUIButtonWithFrame:CGRectMake(screenWidth/2.0-120, 60, 100, 40) title:@"开始弹幕"];
     [startButton addTarget:self action:@selector(didClickStart) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:startButton];
     
     
     // 结束按钮
-    UIButton *stopButton = [[self class] createQQUIButtonWithFrame:CGRectMake(220, 60, 100, 40) title:@"结束弹幕"];
+    UIButton *stopButton = [[self class] createQQUIButtonWithFrame:CGRectMake(screenWidth/2.0+20, 60, 100, 40) title:@"结束弹幕"];
     [startButton addTarget:self action:@selector(didClickStop) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:stopButton];
     
