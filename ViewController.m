@@ -32,30 +32,14 @@
 
     
     // 开始按钮
-    UIButton *startButton = ({
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(60, 60, 100, 40)];
-        [[button layer] setCornerRadius:10];
-        [[button layer] setBorderWidth:1.0];
-        [[button layer] setMasksToBounds:YES];
-        [button setTitle:@"开始弹幕" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(didClickStart) forControlEvents:UIControlEventTouchUpInside];
-        button;
-    });
+    UIButton *startButton = [[self class] createQQUIButtonWithFrame:CGRectMake(60, 60, 100, 40) title:@"开始弹幕"];
+    [startButton addTarget:self action:@selector(didClickStart) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:startButton];
     
     
     // 结束按钮
-    UIButton *stopButton = ({
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(220, 60, 100, 40)];
-        [[button layer] setCornerRadius:10];
-        [[button layer] setBorderWidth:1.0];
-        [[button layer] setMasksToBounds:YES];
-        [button setTitle:@"结束弹幕" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(didClickStop) forControlEvents:UIControlEventTouchUpInside];
-        button;
-    });
+    UIButton *stopButton = [[self class] createQQUIButtonWithFrame:CGRectMake(220, 60, 100, 40) title:@"结束弹幕"];
+    [startButton addTarget:self action:@selector(didClickStop) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:stopButton];
     
 }
@@ -83,6 +67,36 @@
     [self.view addSubview:bulletView];
     
     [bulletView startAnimation];
+}
+
+
+
+#pragma mark - 生成 UIButton 控件
++ (UIButton *)createQQUIButtonWithFrame:(CGRect)frame title:(NSString *)title
+{
+    // 按钮背景1
+    UIImage *buttonImage = [UIImage imageNamed:@"blue.png"];
+    buttonImage = [buttonImage stretchableImageWithLeftCapWidth:floorf(buttonImage.size.width/2)
+                                                   topCapHeight:floorf(buttonImage.size.height/2)];
+    // 按钮背景2
+    UIImage *buttonImageselected = [UIImage imageNamed:@"orange.png"];
+    buttonImage = [buttonImage stretchableImageWithLeftCapWidth:floorf(buttonImage.size.width/2)
+                                                   topCapHeight:floorf(buttonImage.size.height/2)];
+    // 创建按钮
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:frame];
+    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    [button setBackgroundImage:buttonImageselected forState:UIControlStateHighlighted];
+    [button setShowsTouchWhenHighlighted:YES];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitle:title forState:UIControlStateHighlighted];
+    [[button titleLabel] setFont:[UIFont boldSystemFontOfSize:20]];
+    [[button titleLabel] setTextAlignment:NSTextAlignmentLeft];
+    [[button layer] setCornerRadius:10];
+    [[button layer] setBorderWidth:0.0];
+    [[button layer] setMasksToBounds:YES];
+    
+    return button;
 }
 
 
