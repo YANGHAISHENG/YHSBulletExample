@@ -42,7 +42,7 @@
     
     // 结束按钮
     UIButton *stopButton = [[self class] createQQUIButtonWithFrame:CGRectMake(screenWidth/2.0+20, 60, 100, 40) title:@"结束弹幕"];
-    [startButton addTarget:self action:@selector(didClickStop) forControlEvents:UIControlEventTouchUpInside];
+    [stopButton addTarget:self action:@selector(didClickStop) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:stopButton];
     
 }
